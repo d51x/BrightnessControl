@@ -33,6 +33,7 @@ public class BrightnessSlider extends LinearLayout implements OnClickListener, O
     private RadioButton radioButtonLight;
     private RadioButton radioButtonDark;
     private OnClickListener brModeGroupListener;
+	public int brightnessMode;
 
     public BrightnessSlider(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -42,6 +43,7 @@ public class BrightnessSlider extends LinearLayout implements OnClickListener, O
         this.mObserver = new BrightnessSettingsObserver(this.mHandler);
         this.mBRModeUtil = null;
         this.mBRModeHandler = new BRModeHandler(this);
+	    this.brightnessMode = -1;
     }
 
     protected void onFinishInflate() {
@@ -85,6 +87,7 @@ public class BrightnessSlider extends LinearLayout implements OnClickListener, O
             }
         });
        updateState();
+	   updateModeState();
     }
 
 
@@ -96,20 +99,23 @@ public class BrightnessSlider extends LinearLayout implements OnClickListener, O
         } else {
             setVisibility(GONE);
         }
-        switch ( this.mBRModeHandler.brightnessMode ) {
-            case 0:
-                this.radioButtonAuto.setChecked( true );
-                break;
-            case 1:
-                this.radioButtonLight.setChecked( true );
-                break;
-            case 2:
-                this.radioButtonDark.setChecked( true );
-                break;
-            default:
-                break;
-        }
     }
+
+	public void updateModeState() {
+		switch ( this.brightnessMode ) {
+			case 0:
+				this.radioButtonAuto.setChecked( true );
+				break;
+			case 1:
+				this.radioButtonLight.setChecked( true );
+				break;
+			case 2:
+				this.radioButtonDark.setChecked( true );
+				break;
+			default:
+				break;
+		}
+	}
 
     private int getCurrBrightness() {
         return System.getInt(this.mContext.getContentResolver(), "screen_brightness", 0);
@@ -202,17 +208,30 @@ public class BrightnessSlider extends LinearLayout implements OnClickListener, O
 
     private class BRModeHandler extends Handler {
         final BrightnessSlider brightnessSlider;
-        public int brightnessMode;
 
         BRModeHandler(BrightnessSlider brightnessSlider) {
             this.brightnessSlider = brightnessSlider;
-            this.brightnessMode = -1;
+            brightnessMode = -1;
         }
 
         public void handleMessage(Message message) {
             switch (message.what) {
                 case 258:
                     brightnessMode = message.arg2;
+	                switch ( brightnessMode ) {
+		                case 0:
+			                this.brightnessSlider.radioButtonAuto.setChecked ( true );
+			                break;
+		                case 1:
+			                this.brightnessSlider.radioButtonLight.setChecked ( true );
+			                break;
+		                case 2:
+			                this.brightnessSlider.radioButtonDark.setChecked ( true );
+			                break;
+		                default:
+			                break;
+	                }
+
                 default:
                     break;
             }
