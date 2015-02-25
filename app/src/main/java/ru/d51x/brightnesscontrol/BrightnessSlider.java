@@ -66,7 +66,6 @@ public class BrightnessSlider extends LinearLayout implements OnClickListener, O
         mBrightnessModeGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // TODO Auto-generated method stub
                 switch (checkedId) {
                     case R.id.brModeAuto:
                         mBRModeUtil.write(258, 1, 0);
