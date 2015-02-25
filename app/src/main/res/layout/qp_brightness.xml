@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ru.d51x.brightnesscontrol.BrightnessSlider
+    android:gravity="center" android:background="@drawable/qp_brightness_bg" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:tag="br_min" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/qp_brightness_min" />
+    <SeekBar android:tag="slider" android:padding="10.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:maxHeight="5.0dip" android:minHeight="5.0dip" android:layout_weight="1.0" />
+    <ImageView android:tag="br_max" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/qp_brightness_max" />
+    <LinearLayout android:visibility="visible" android:layout_width="300.0dip" android:layout_height="fill_parent">
+        <RadioGroup android:id="@+id/brModeGroup" android:gravity="center" android:orientation="horizontal" android:paddingLeft="10.0dip" android:paddingRight="10.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <RadioButton android:id="@+id/brModeAuto" android:paddingRight="20.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="Auto" />
+            <RadioButton android:id="@+id/brModeLight" android:paddingRight="20.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="Light" />
+            <RadioButton android:id="@+id/brModeDark" android:paddingRight="20.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="Dark" />
+        </RadioGroup>
+    </LinearLayout>
+</ru.d51x.brightnesscontrol.BrightnessSlider>
